@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acme index{% endblock %}
+
+{% block body %}
+    <h1>Acme index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FieldA</th>
+                <th>FieldB</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for acme in acmes %}
+            <tr>
+                <td>{{ acme.id }}</td>
+                <td>{{ acme.fieldA }}</td>
+                <td>{{ acme.fieldB }}</td>
+                <td>
+                    <a href="{{ path('acme_show', {'id': acme.id}) }}">show</a>
+                    <a href="{{ path('acme_edit', {'id': acme.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('acme_new') }}">Create new</a>
+{% endblock %}
