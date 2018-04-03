@@ -1,3 +1,5 @@
+import 'bootstrap';
+
 require('datatables.net-bs4');
 import dt from 'datatables.net';
 

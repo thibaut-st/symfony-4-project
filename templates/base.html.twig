@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
 
-        <script src="{{ asset('build/js/app.js') }}"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+<header>
+    {% block menu %}
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="/">ACME</a>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                {{ knp_menu_render('main') }}
+            </div>
+        </nav>
+    {% endblock %}
+</header>
+
+<main class="container" role="main">
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <span class="text-muted">Place sticky footer content here.</span>
+</footer>
+
+<script src="{{ asset('build/js/app.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+
 </html>
