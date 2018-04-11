@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
+ * Class Acme
+ * @package App\Entity
+ *
  * @ORM\Entity(repositoryClass="App\Repository\AcmeRepository")
  */
 class Acme
@@ -56,7 +59,7 @@ class Acme
         return $this->fieldB;
     }
 
-    public function setFieldB(string $fieldB): self
+    public function setFieldB(?string $fieldB): self
     {
         $this->fieldB = $fieldB;
 

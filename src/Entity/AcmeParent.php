@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
+ * Class AcmeParent
+ * @package App\Entity
+ *
  * @ORM\Entity(repositoryClass="App\Repository\AcmeParentRepository")
  */
 class AcmeParent
@@ -46,7 +49,7 @@ class AcmeParent
         return $this->fieldPA;
     }
 
-    public function setFieldPA(string $fieldPA): self
+    public function setFieldPA(?string $fieldPA): self
     {
         $this->fieldPA = $fieldPA;
 
