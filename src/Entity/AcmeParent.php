@@ -27,7 +27,7 @@ class AcmeParent
     private $fieldPA;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Acme", mappedBy="acmeParent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Acme", mappedBy="acmeParent", cascade={"persist"})
      */
     private $fieldPB;
 

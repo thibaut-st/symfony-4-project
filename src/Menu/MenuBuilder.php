@@ -35,6 +35,7 @@ class MenuBuilder
 
         $menu->addChild('Acme', array('route' => 'acme_index'));
         $menu->addChild('Acme parent', array('route' => 'acme_parent_index'));
+        $menu->addChild('Admin', array('route' => 'admin'));
 
         foreach ($menu as $child) {
             $child->setAttribute('class', 'nav-item')->setLinkAttribute('class', 'nav-link');

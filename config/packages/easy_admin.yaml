@@ -1,4 +1,10 @@
 easy_admin:
     entities:
-        - App\Entity\Acme
-        - App\Entity\AcmeParent
+        Acme:
+            class: App\Entity\Acme
+        AcmeParent:
+            class: App\Entity\AcmeParent
+            edit:
+                fields:
+                    - { property: 'fieldPA' }
+                    - { property: 'fieldPB', type_options: { by_reference: false }}
