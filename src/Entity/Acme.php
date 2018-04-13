@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as GEDMO;
 
 /**
  * Class Acme
@@ -17,8 +18,8 @@ class Acme
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(type="guid")
      */
     private $id;
 
@@ -36,6 +37,13 @@ class Acme
      * @ORM\ManyToOne(targetEntity="App\Entity\AcmeParent", inversedBy="fieldPB")
      */
     private $acmeParent;
+
+    /**
+     * @GEDMO\Slug(fields={"fieldB", "createdAt"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
 
     public function getId()
     {
@@ -82,4 +90,10 @@ class Acme
     {
         return $this->getFieldB();
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
 }

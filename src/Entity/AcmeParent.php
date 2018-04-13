@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as GEDMO;
 
 /**
  * Class AcmeParent
@@ -19,8 +20,8 @@ class AcmeParent
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(type="guid")
      */
     private $id;
 
@@ -33,6 +34,13 @@ class AcmeParent
      * @ORM\OneToMany(targetEntity="App\Entity\Acme", mappedBy="acmeParent", cascade={"persist"})
      */
     private $fieldPB;
+
+    /**
+     * @GEDMO\Slug(fields={"fieldPA", "createdAt"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
 
     public function __construct()
     {
@@ -91,4 +99,10 @@ class AcmeParent
     {
         return $this->getId() . ' - ' . $this->getFieldPA();
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
 }
