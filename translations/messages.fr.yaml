@@ -1,1 +1,12 @@
-test_trans: traduction fonctionne
+
+# FLASH MESSAGES
+success: Succès !
+danger: Erreur !
+warning: Attention !
+info: Information !
+message_create_success: Création réussie.
+message_create_danger: Erreur à la création.
+message_edit_success: Édition réussie.
+message_edit_danger: Erreur à l'édition.
+message_delete_success: Suppression réussie.
+message_delete_danger: Erreur à la suppression.

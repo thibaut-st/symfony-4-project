@@ -3,28 +3,28 @@
 {% block title %}Acme{% endblock %}
 
 {% block body %}
-    <h1>Acme</h1>
+    <h1>Acme
+        <span class="btn-group float-right">
+            <a class="btn btn-lg btn-warning" href="{{ path('acme_edit', {'id': acme.id}) }}">Edit</a>
+            <a class="btn btn-lg btn-primary float-right" href="{{ path('acme_index') }}">back to list</a>
+        </span>
+    </h1>
+    <hr>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ acme.id }}</td>
-            </tr>
-            <tr>
-                <th>FieldA</th>
-                <td>{{ acme.fieldA }}</td>
-            </tr>
-            <tr>
-                <th>FieldB</th>
-                <td>{{ acme.fieldB }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ acme.id }}</td>
+        </tr>
+        <tr>
+            <th>FieldA</th>
+            <td>{{ acme.fieldA }}</td>
+        </tr>
+        <tr>
+            <th>FieldB</th>
+            <td>{{ acme.fieldB }}</td>
+        </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('acme_index') }}">back to list</a>
-
-    <a href="{{ path('acme_edit', {'id': acme.id}) }}">edit</a>
-
-    {{ include('acme/_delete_form.html.twig') }}
 {% endblock %}

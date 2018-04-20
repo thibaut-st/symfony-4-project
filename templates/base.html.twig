@@ -16,14 +16,25 @@
             <a class="navbar-brand" href="/">ACME</a>
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                {{ knp_menu_render('main') }}
-                {{ include('_user_menu.html.twig') }}
+                {{ include('_menu/_main.html.twig') }}
+                {{ include('_menu/_user.html.twig') }}
             </div>
         </nav>
     {% endblock %}
 </header>
 
 <main class="container" role="main">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                <strong>{{ label|trans }}</strong> {{ message|trans }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     {% block body %}{% endblock %}
 </main>
 

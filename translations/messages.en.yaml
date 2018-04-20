@@ -1,2 +1,13 @@
 #TODO translate
-test_trans: translation work
+
+# FLASH MESSAGES
+success: Success!
+danger: Error!
+warning: Warning!
+info: Information!
+message_create_success: Creation successful.
+message_create_danger: Creation error.
+message_edit_success: Edition successful.
+message_edit_danger: Edition error.
+message_delete_success: Deletion successful.
+message_delete_danger: Deletion error.

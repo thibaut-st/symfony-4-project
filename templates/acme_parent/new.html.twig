@@ -3,9 +3,11 @@
 {% block title %}New AcmeParent{% endblock %}
 
 {% block body %}
-    <h1>Create new AcmeParent</h1>
+    <h1>
+        Create new AcmeParent
+        <a class="btn btn-lg btn-primary float-right" href="{{ path('acme_parent_index') }}">back to list</a>
+    </h1>
+    <hr>
 
     {{ include('acme_parent/_form.html.twig') }}
-
-    <a href="{{ path('acme_parent_index') }}">back to list</a>
 {% endblock %}

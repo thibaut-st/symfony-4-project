@@ -3,11 +3,17 @@
 {% block title %}Edit Acme{% endblock %}
 
 {% block body %}
-    <h1>Edit Acme</h1>
+    <h1>Edit Acme
+        <span class="btn-group float-right" role="group">
+            <a class="btn btn-lg btn-info" href="{{ path('acme_show', {'id': acme.id}) }}">Show</a>
+            <a class="btn btn-lg btn-primary" href="{{ path('acme_index') }}">back to list</a>
+        </span>
+    </h1>
+    <hr>
 
     {{ include('acme/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('acme_index') }}">back to list</a>
+    <hr>
 
     {{ include('acme/_delete_form.html.twig') }}
 {% endblock %}

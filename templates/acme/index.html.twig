@@ -3,9 +3,12 @@
 {% block title %}Acme index{% endblock %}
 
 {% block body %}
-    <h1>Acme index</h1>
+    <h1>Acme index
+        <a class="btn btn-lg btn-success float-right" href="{{ path('acme_new') }}">Create new</a>
+    </h1>
+    <hr>
 
-    <table class="table table-datatable">
+    <table class="table table-sm table-hover table-datatable">
         <thead>
         <tr>
             <th>Id</th>
@@ -21,8 +24,10 @@
                 <td>{{ acme.fieldA }}</td>
                 <td>{{ acme.fieldB }}</td>
                 <td>
-                    <a href="{{ path('acme_show', {'id': acme.id}) }}">show</a>
-                    <a href="{{ path('acme_edit', {'id': acme.id}) }}">edit</a>
+                    <span class="btn-group">
+                        <a class="btn btn-sm btn-info" href="{{ path('acme_show', {'id': acme.id}) }}">show</a>
+                        <a class="btn btn-sm btn-warning" href="{{ path('acme_edit', {'id': acme.id}) }}">edit</a>
+                    </span>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +37,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('acme_new') }}">Create new</a>
 {% endblock %}

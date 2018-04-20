@@ -32,12 +32,17 @@ class AcmeController extends Controller
         $form = $this->createForm(AcmeType::class, $acme);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($acme);
-            $em->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($acme);
+                $em->flush();
 
-            return $this->redirectToRoute('acme_index');
+                $this->addFlash('success', 'message_create_success');
+                return $this->redirectToRoute('acme_index');
+            } else {
+                $this->addFlash('danger', 'message_create_danger');
+            }
         }
 
         return $this->render('acme/new.html.twig', [
@@ -62,10 +67,15 @@ class AcmeController extends Controller
         $form = $this->createForm(AcmeType::class, $acme);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('acme_edit', ['id' => $acme->getId()]);
+                $this->addFlash('success', 'message_edit_success');
+                return $this->redirectToRoute('acme_edit', ['id' => $acme->getId()]);
+            } else {
+                $this->addFlash('danger', 'message_edit_danger');
+            }
         }
 
         return $this->render('acme/edit.html.twig', [
@@ -79,10 +89,14 @@ class AcmeController extends Controller
      */
     public function delete(Request $request, Acme $acme): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$acme->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $acme->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($acme);
             $em->flush();
+
+            $this->addFlash('success', 'message_delete_success');
+        }else{
+            $this->addFlash('danger', 'message_delete_danger');
         }
 
         return $this->redirectToRoute('acme_index');

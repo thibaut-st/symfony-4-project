@@ -3,15 +3,18 @@
 {% block title %}AcmeParent index{% endblock %}
 
 {% block body %}
-    <h1>AcmeParent index</h1>
+    <h1>AcmeParent index
+        <a class="btn btn-lg btn-success float-right" href="{{ path('acme_parent_new') }}">Create new</a>
+    </h1>
+    <hr>
 
-    <table class="table">
+    <table class="table table-sm table-hover table-datatable">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>FieldPA</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>FieldPA</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for acme_parent in acme_parents %}
@@ -19,8 +22,10 @@
                 <td>{{ acme_parent.id }}</td>
                 <td>{{ acme_parent.fieldPA }}</td>
                 <td>
-                    <a href="{{ path('acme_parent_show', {'id': acme_parent.id}) }}">show</a>
-                    <a href="{{ path('acme_parent_edit', {'id': acme_parent.id}) }}">edit</a>
+                    <span class="btn-group">
+                        <a class="btn btn-info" href="{{ path('acme_parent_show', {'id': acme_parent.id}) }}">show</a>
+                        <a class="btn btn-warning" href="{{ path('acme_parent_edit', {'id': acme_parent.id}) }}">edit</a>
+                    </span>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('acme_parent_new') }}">Create new</a>
 {% endblock %}

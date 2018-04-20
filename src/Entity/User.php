@@ -29,5 +29,8 @@ class User extends BaseUser
      */
     protected $id;
 
+    /*
+     * @todo add locale
+     */
 
 }
