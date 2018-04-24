@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class User
@@ -29,8 +30,40 @@ class User extends BaseUser
      */
     protected $id;
 
-    /*
-     * @todo add locale
+    /**
+     * @var string $locale
+     *
+     * @ORM\Column(type="string", length=2, nullable=false, options={"default": "en"})
+     *
+     * @Assert\Locale()
      */
+    private $locale;
+
+    /**
+     * @return null|string
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string $locale
+     * @return User
+     */
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
 
 }

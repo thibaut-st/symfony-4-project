@@ -41,8 +41,6 @@ class Acme
     /**
      * @GEDMO\Slug(fields={"fieldB", "createdAt"})
      * @ORM\Column(length=128, unique=true)
-     *
-     * @todo change slug datetime to timestamp
      */
     private $slug;
 

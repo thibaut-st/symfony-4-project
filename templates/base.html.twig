@@ -9,11 +9,11 @@
 </head>
 
 <body>
-{# TODO stop nav overlap main #}
+
 <header>
     {% block menu %}
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="/">ACME</a>
+            <a class="navbar-brand" href="{{ path('index') }}">ACME</a>
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 {{ include('_menu/_main.html.twig') }}

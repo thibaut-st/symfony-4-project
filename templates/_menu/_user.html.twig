@@ -1,3 +1,16 @@
+<div>
+    <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+            <a class="nav-link {{ locale('fr') }}"
+               href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale':'fr'})) }}">FR</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ locale('en') }}"
+               href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale':'en'})) }}">EN</a>
+        </li>
+    </ul>
+</div>
+
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <div class="dropdown show">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
