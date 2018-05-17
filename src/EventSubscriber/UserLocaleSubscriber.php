@@ -12,15 +12,32 @@ use Symfony\Component\Security\Http\SecurityEvents;
  * Stores the locale of the user in the session after the
  * login. This can be used by the LocaleSubscriber afterwards.
  */
+
+/**
+ * Class UserLocaleSubscriber
+ * @package App\EventSubscriber
+ *
+ * @todo Test it, not working properly
+ */
 class UserLocaleSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var SessionInterface
+     */
     private $session;
 
+    /**
+     * UserLocaleSubscriber constructor.
+     * @param SessionInterface $session
+     */
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;
     }
 
+    /**
+     * @param InteractiveLoginEvent $event
+     */
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $user = $event->getAuthenticationToken()->getUser();
@@ -31,6 +48,9 @@ class UserLocaleSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return array(
