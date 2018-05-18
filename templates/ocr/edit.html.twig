@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Ocr{% endblock %}
+
+{% block body %}
+    <h1>Edit Ocr
+        <span class="btn-group float-right" role="group">
+            <a class="btn btn-lg btn-info" href="{{ path('ocr_upload', {'id': ocr.id}) }}">Show</a>
+            <a class="btn btn-lg btn-primary" href="{{ path('ocr_index') }}">back to list</a>
+        </span>
+    </h1>
+    <hr>
+
+    {{ include('ocr/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <hr>
+
+    {{ include('ocr/_delete_form.html.twig') }}
+{% endblock %}

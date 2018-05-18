@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ocr index{% endblock %}
+
+{% block body %}
+    <h1>Ocr index
+        <a class="btn btn-lg btn-success float-right" href="{{ path('ocr_upload') }}">Upload</a>
+    </h1>
+    <hr>
+
+    <table class="table table-sm table-hover table-datatable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Content</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ocr in ocrs %}
+            <tr>
+                <td>{{ ocr.id }}</td>
+                <td>{{ ocr.content|truncate(50, true) }}</td>
+                <td>
+                    <span class="btn-group">
+                        <a class="btn btn-sm btn-info" href="{{ path('ocr_show', {'id': ocr.id}) }}">show</a>
+                        <a class="btn btn-sm btn-warning" href="{{ path('ocr_edit', {'id': ocr.id}) }}">edit</a>
+                    </span>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

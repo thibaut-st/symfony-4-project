@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ocr{% endblock %}
+
+{% block body %}
+    <h1>Ocr
+        <span class="btn-group float-right">
+            <a class="btn btn-lg btn-warning" href="{{ path('ocr_edit', {'id': ocr.id}) }}">Edit</a>
+            <a class="btn btn-lg btn-primary float-right" href="{{ path('ocr_index') }}">back to list</a>
+        </span>
+    </h1>
+    <hr>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ ocr.id }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>
+                <pre>{{ ocr.content }}</pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Pic</th>
+            <td><a href="{{ img_path }}" target="_blank"><img src="{{ img_path | imagine_filter('squared_thumbnail') }}" alt="{{ ocr.image.originalName }}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

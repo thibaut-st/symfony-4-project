@@ -3,6 +3,7 @@
 parameters:
     locale: 'fr'
     app_locales: en|fr
+    upload_directory: '%kernel.project_dir%/public/images/ocr/'
 
 services:
     # default configuration for services in *this* file

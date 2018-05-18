@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Upload image{% endblock %}
+
+{% block body %}
+    <h1>
+        Upload an image
+        <a class="btn btn-lg btn-primary float-right" href="{{ path('ocr_index') }}">back to list</a>
+    </h1>
+    <hr>
+
+    {{ include('ocr/_form.html.twig') }}
+{% endblock %}
+
+
