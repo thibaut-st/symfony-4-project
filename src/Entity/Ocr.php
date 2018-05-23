@@ -14,6 +14,7 @@ use Vich\UploaderBundle\Entity\File as EmbeddedFile;
  * @package App\Entity
  *
  * @ORM\Entity(repositoryClass="App\Repository\OcrRepository")
+ * @ORM\EntityListeners(value={"App\EventListener\OcrListener"})
  * @Vich\Uploadable
  */
 class Ocr
@@ -36,6 +37,14 @@ class Ocr
      * @ORM\Column(type="text", nullable=true)
      */
     private $content;
+
+    /**
+     * @var User $owner
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
+     */
+    private $owner;
 
     /**
      * @var File $imageFile
@@ -126,5 +135,24 @@ class Ocr
     public function getImage(): ?EmbeddedFile
     {
         return $this->image;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param User|null $owner
+     * @return Ocr
+     */
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
     }
 }

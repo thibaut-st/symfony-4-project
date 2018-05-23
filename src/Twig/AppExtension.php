@@ -38,7 +38,7 @@ class AppExtension extends AbstractExtension
     public function getFunctions()
     {
         return array(
-            new TwigFunction('active', array($this, 'activeFunction')),
+            new TwigFunction('active', array($this, 'isActiveFunction')),
             new TwigFunction('locale', array($this, 'isLocaleFunction')),
         );
     }
@@ -47,17 +47,18 @@ class AppExtension extends AbstractExtension
      * Used in twig with {{ active('name_of_route') }}, it will return active if the link given match the current route
      * $Link can be string or array (useful for dropdown)
      *
-     * @param mixed $link
+     * @param string|array $link
      * @return string
-     * @todo create test phpunit
      */
-    public function activeFunction($link): string
+    public function isActiveFunction($link): string
     {
         $route = $this->request->getCurrentRequest()->get('_route');
         return (in_array($route, (array)$link)) ? 'active' : '';
     }
 
     /**
+     * Used in twig with {{ locale('locale_language') }}, it will return active if the locale given match the current user locale
+     *
      * @param string $locale
      * @return string
      */

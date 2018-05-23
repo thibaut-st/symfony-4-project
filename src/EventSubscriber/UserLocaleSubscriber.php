@@ -44,7 +44,7 @@ class UserLocaleSubscriber implements EventSubscriberInterface
 
         if (null !== $user->getLocale()) {
             $this->session->set('_locale', $user->getLocale());
-            dump($this->session->get('_locale'));
+//            dump($this->session->get('_locale'));
         }
     }
 

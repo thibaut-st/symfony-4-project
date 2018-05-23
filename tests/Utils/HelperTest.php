@@ -12,6 +12,9 @@ use PHPUnit\Framework\TestCase;
 class HelperTest extends TestCase
 {
 
+    /**
+     * The function should return a string
+     */
     public function testRandomStringGenerator()
     {
         $randomString = Helper::randomStringGenerator();
@@ -20,6 +23,9 @@ class HelperTest extends TestCase
         $this->assertTrue(is_string($randomString));
     }
 
+    /**
+     * The function should return a string of the given length
+     */
     public function testRandomStringGeneratorLength()
     {
         $randomString0 = Helper::randomStringGenerator(0);
