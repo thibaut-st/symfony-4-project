@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ocr;
 use App\Form\OcrType;
 use App\Repository\OcrRepository;
+use App\Utils\OcrBusiness;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,8 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  * @package App\Controller
  *
  * @Route("/ocr")
+ *
+ * @todo security/voter ocr <==> user
  */
 class OcrController extends Controller
 {
@@ -44,12 +47,13 @@ class OcrController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            if($form->isValid()){
+            if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($ocr);
                 try {
-                    $tesseract = new TesseractOCR($this->container->getParameter('upload_directory') . $ocr->getImage()->getName());
-                    $text = $tesseract->run();
+                    $ocrBusiness = new OcrBusiness($this->container->getParameter('upload_directory') . $ocr->getImage()->getName(),
+                        $ocr->getImage()->getMimeType());
+                    $text = $ocrBusiness->extractText();
 
                     $ocr->setContent($text);
                     $em->persist($ocr);
@@ -59,7 +63,7 @@ class OcrController extends Controller
                 } catch (\Exception $e) {
                     $this->addFlash('danger', $e->getMessage());
                 }
-            }else{
+            } else {
                 $this->addFlash('danger', 'message_upload_danger');
             }
 
