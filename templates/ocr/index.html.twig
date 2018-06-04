@@ -13,6 +13,7 @@
         <tr>
             <th>Id</th>
             <th>Content</th>
+            <th>Owner</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -21,10 +22,12 @@
             <tr>
                 <td>{{ ocr.id }}</td>
                 <td>{{ ocr.content|truncate(50, true) }}</td>
+                <td>{{ ocr.owner.username }}</td>
                 <td>
                     <span class="btn-group">
                         <a class="btn btn-sm btn-info" href="{{ path('ocr_show', {'id': ocr.id}) }}">show</a>
-                        <a class="btn btn-sm btn-warning" href="{{ path('ocr_edit', {'id': ocr.id}) }}">edit</a>
+                        <a class="btn btn-sm btn-warning{% if ocr.owner.id != app.user.id %} disabled{% endif %}"
+                           href="{{ path('ocr_edit', {'id': ocr.id}) }}">edit</a>
                     </span>
                 </td>
             </tr>

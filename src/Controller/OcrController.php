@@ -6,11 +6,11 @@ use App\Entity\Ocr;
 use App\Form\OcrType;
 use App\Repository\OcrRepository;
 use App\Utils\OcrBusiness;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use thiagoalessio\TesseractOCR\TesseractOCR;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 /**
@@ -18,8 +18,6 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  * @package App\Controller
  *
  * @Route("/ocr")
- *
- * @todo security/voter ocr <==> user
  */
 class OcrController extends Controller
 {
@@ -94,6 +92,8 @@ class OcrController extends Controller
      *
      * @Route("/{id}/edit", name="ocr_edit", methods="GET|POST")
      *
+     * @Security("user.getId() == ocr.getOwner().getId()")
+     *
      * @todo edit form to reupload img
      */
     public function edit(Request $request, Ocr $ocr): Response
@@ -119,6 +119,8 @@ class OcrController extends Controller
      * @return Response
      *
      * @Route("/{id}", name="ocr_delete", methods="DELETE")
+     *
+     * @Security("user.getId() == ocr.getOwner().getId()")
      */
     public function delete(Request $request, Ocr $ocr): Response
     {
