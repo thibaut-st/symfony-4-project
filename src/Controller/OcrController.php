@@ -46,25 +46,23 @@ class OcrController extends Controller
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($ocr);
                 try {
-                    $ocrBusiness = new OcrBusiness($this->container->getParameter('upload_directory') . $ocr->getImage()->getName(),
-                        $ocr->getImage()->getMimeType());
-                    $text = $ocrBusiness->extractText();
-
-                    $ocr->setContent($text);
-                    $em->persist($ocr);
-                    $em->flush();
-                    $this->addFlash('success', 'message_upload_success');
-                    return $this->redirectToRoute('ocr_index');
+                    $ocrBusiness = new OcrBusiness($ocr->getImageFile()->getPathname(),
+                        $ocr->getImageFile()->getMimeType());
+                    $ocr->setContent($ocrBusiness->extractText());
                 } catch (\Exception $e) {
                     $this->addFlash('danger', $e->getMessage());
+                    return $this->redirectToRoute('ocr_upload');
                 }
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($ocr);
+                $em->flush();
+                $this->addFlash('success', 'message_upload_success');
+                return $this->redirectToRoute('ocr_show', ['id' => $ocr->getId()]);
             } else {
                 $this->addFlash('danger', 'message_upload_danger');
             }
-
         }
 
         return $this->render('ocr/upload.html.twig', ['form' => $form->createView()]);
@@ -88,28 +86,42 @@ class OcrController extends Controller
     /**
      * @param Request $request
      * @param Ocr $ocr
+     * @param UploaderHelper $helper
      * @return Response
      *
      * @Route("/{id}/edit", name="ocr_edit", methods="GET|POST")
      *
      * @Security("user.getId() == ocr.getOwner().getId()")
-     *
-     * @todo edit form to reupload img
      */
-    public function edit(Request $request, Ocr $ocr): Response
+    public function edit(Request $request, Ocr $ocr, UploaderHelper $helper): Response
     {
         $form = $this->createForm(OcrType::class, $ocr);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                try {
+                    $ocrBusiness = new OcrBusiness($ocr->getImageFile()->getPathname(),
+                        $ocr->getImageFile()->getMimeType());
+                    $ocr->setContent($ocrBusiness->extractText());
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                    return $this->redirectToRoute('ocr_edit', ['id' => $ocr->getId()]);
+                }
 
-            return $this->redirectToRoute('ocr_edit', ['id' => $ocr->getId()]);
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'message_upload_success');
+                return $this->redirectToRoute('ocr_edit', ['id' => $ocr->getId()]);
+            } else {
+                $this->addFlash('danger', 'message_upload_danger');
+            }
         }
 
+        $imgPath = ($helper->asset($ocr, 'imageFile')) ?? null;
         return $this->render('ocr/edit.html.twig', [
             'ocr' => $ocr,
             'form' => $form->createView(),
+            'img_path' => $imgPath,
         ]);
     }
 

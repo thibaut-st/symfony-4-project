@@ -11,8 +11,9 @@
     <table class="table table-sm table-hover table-datatable">
         <thead>
         <tr>
-            <th>Id</th>
+            <th>Index</th>
             <th>Content</th>
+            <th>Created at</th>
             <th>Owner</th>
             <th>actions</th>
         </tr>
@@ -20,9 +21,10 @@
         <tbody>
         {% for ocr in ocrs %}
             <tr>
-                <td>{{ ocr.id }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ ocr.content|truncate(50, true) }}</td>
                 <td>{{ ocr.owner.username }}</td>
+                <td>{{ ocr.createdAt|date('Y-m-d H:i:s') }}</td>
                 <td>
                     <span class="btn-group">
                         <a class="btn btn-sm btn-info" href="{{ path('ocr_show', {'id': ocr.id}) }}">show</a>

@@ -16,4 +16,29 @@
     <hr>
 
     {{ include('ocr/_delete_form.html.twig') }}
+
+    <hr>
+    <h2>Recap</h2>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Content</th>
+            <td>
+                <pre>{{ ocr.content }}</pre>
+            </td>
+        </tr>
+        <tr>
+            <th>Pic</th>
+            <td>
+                {% if img_path %}
+                    <a href="{{ img_path }}" target="_blank"><img
+                                src="{{ img_path | imagine_filter('squared_thumbnail') }}"
+                                alt="{{ ocr.image.originalName }}"></a>
+                {% else %}
+                    Null
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
 {% endblock %}

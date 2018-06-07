@@ -5,3 +5,8 @@
 //locale
 @import "sticky-footer-navbar";
 @import "fixed-top-nav-padding";
+
+//locale scss
+.custom-file-input{
+  opacity: 100!important; //hack bug bootstrap "opacity: 0;"
+}

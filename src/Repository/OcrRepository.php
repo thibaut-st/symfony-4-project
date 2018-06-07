@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  *
  * @method Ocr|null find($id, $lockMode = null, $lockVersion = null)
  * @method Ocr|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ocr[]    findAll()
  * @method Ocr[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class OcrRepository extends ServiceEntityRepository
@@ -26,32 +25,11 @@ class OcrRepository extends ServiceEntityRepository
         parent::__construct($registry, Ocr::class);
     }
 
-//    /**
-//     * @return Ocr[] Returns an array of Ocr objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Ocr[]|array
+     */
+    public function findAll(): ?array
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy([], ['createdAt' => 'DESC']);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Ocr
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
