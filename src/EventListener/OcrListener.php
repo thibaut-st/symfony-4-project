@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class OcrListener
 {
     /**
-     * @var User
+     * @var TokenStorageInterface
      */
     private $tokenStorage;
 

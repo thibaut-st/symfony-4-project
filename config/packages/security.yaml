@@ -11,10 +11,13 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                default_target_path: acme_index
                 use_referer: true
-
-            logout:       true
-            anonymous:    true
+            logout:
+                path: fos_user_security_logout
+            anonymous: true
             access_denied_handler: App\Security\AccessDeniedHandler
 
     role_hierarchy:
@@ -24,11 +27,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/login$, allow_if: "is_anonymous() and !is_authenticated()" }
-        - { path: ^/register, allow_if: "is_anonymous() and !is_authenticated()" }
-        - { path: ^/resetting, allow_if: "is_anonymous() and !is_authenticated()" }
-        - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/logout, role: ROLE_USER }
-        - { path: ^/profile/, role: ROLE_USER }
-        - { path: ^/profile/edit, role: ROLE_USER }
         - { path: ^/%app_locales%/ocr/, role: ROLE_USER }
+        - { path: ^/%app_locales%/acme/, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/%app_locales%/login$, allow_if: "is_anonymous() and !is_authenticated()" }
+        - { path: ^/%app_locales%/register, allow_if: "is_anonymous() and !is_authenticated()" }
+        - { path: ^/%app_locales%/resetting, allow_if: "is_anonymous() and !is_authenticated()" }
+        - { path: ^/%app_locales%/admin/, role: ROLE_ADMIN }
+        - { path: ^/%app_locales%/logout, role: ROLE_USER }
+        - { path: ^/%app_locales%/profile/, role: ROLE_USER }
+        - { path: ^/%app_locales%/profile/edit, role: ROLE_USER }
