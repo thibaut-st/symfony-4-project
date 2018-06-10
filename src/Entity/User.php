@@ -33,7 +33,7 @@ class User extends BaseUser
     /**
      * @var string $locale
      *
-     * @ORM\Column(type="string", length=2, nullable=false, options={"default": "en"})
+     * @ORM\Column(type="string", length=2, nullable=true, options={"default": "en"})
      *
      * @Assert\Locale()
      */
